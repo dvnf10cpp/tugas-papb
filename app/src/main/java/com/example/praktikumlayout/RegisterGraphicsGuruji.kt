@@ -3,15 +3,24 @@ package com.example.praktikumlayout
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.praktikumlayout.domain.account.Account
+import com.example.praktikumlayout.domain.account.AccountService
 
 class RegisterGraphicsGuruji : AppCompatActivity() {
     private lateinit var loginRedirect: TextView
     private lateinit var registerBtn: Button
+    private lateinit var fullnameEt: EditText
+    private lateinit var emailEt: EditText
+    private lateinit var passwordEt: EditText
+    private lateinit var registerWarning: TextView
+
+    private val accountService = AccountService.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +40,10 @@ class RegisterGraphicsGuruji : AppCompatActivity() {
     private fun setupViews() {
         loginRedirect = findViewById(R.id.login_redirect)
         registerBtn = findViewById(R.id.register_btn)
+        fullnameEt = findViewById(R.id.fullname_input)
+        emailEt = findViewById(R.id.email_input)
+        passwordEt = findViewById(R.id.password_input)
+        registerWarning = findViewById(R.id.register_warning)
     }
 
     private fun setupListener() {
@@ -50,6 +63,30 @@ class RegisterGraphicsGuruji : AppCompatActivity() {
     }
 
     private fun attemptRegister() {
-        // TODO: register with db
+        val fullname = fullnameEt.text.toString()
+        val email = emailEt.text.toString()
+        val password = passwordEt.text.toString()
+
+        val account = Account(
+            fullname,
+            email,
+            password
+        )
+
+        if (fullname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            // invalid validation
+            registerWarning.text = "Input cannot be empty"
+            return
+        }
+
+        if (accountService.isAlreadyRegistered(account)) {
+            // already registered
+            registerWarning.text = "Email already registered"
+            return
+        }
+
+        accountService.registerAccount(account)
+
+        navigateToLogin()
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".LoginGraphicsGuruji">
+    tools:context=".activity.Profile">
 
     <ImageView
         android:id="@+id/logo"
@@ -31,7 +31,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintRight_toRightOf="parent" />
-
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Welcome"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/para"
+        app:layout_constraintRight_toRightOf="parent" />
     <LinearLayout
         android:id="@+id/form_input"
         android:layout_width="match_parent"
@@ -44,7 +57,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
         <EditText
-            android:id="@+id/email_et"
+            android:id="@+id/fullname_input"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:hint="Fullname"
+            android:elevation="6dp"
+            android:textColorHint="@color/white"
+            android:background="@drawable/bg_input_guruji"
+            />
+        <EditText
+            android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:paddingStart="20dp"
@@ -56,82 +81,63 @@
             android:background="@drawable/bg_input_guruji"
             />
         <EditText
-            android:id="@+id/password_et"
+            android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:paddingStart="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:hint="Password"
+            android:inputType="textPassword"
+            android:importantForAccessibility="yes"
             android:elevation="6dp"
             android:textColorHint="@color/white"
             android:background="@drawable/bg_input_guruji"
             />
         <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/update_btn"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="20dp"
-            android:text="Login"
+            android:text="Update Profile"
             app:backgroundTint="@color/white"
             android:background="@drawable/bg_button_guruji"
             android:textColor="@color/blue"
             android:textAllCaps="true"
             android:elevation="6dp"
             android:textSize="16sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forgot Password?"
-            android:layout_marginTop="14dp"
-            android:textColor="@color/white"
-            android:layout_gravity="end"/>
     </LinearLayout>
-    <TextView
-        android:id="@+id/login_warning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/red"
-        app:layout_constraintTop_toBottomOf="@+id/form_input"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
     <LinearLayout
         android:id="@+id/socials"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:padding="30dp"
+        android:padding="10dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/form_input"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/bg_white_nav_guruji"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center" >
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/gmail"
-            android:layout_marginHorizontal="12dp"/>
+            android:id="@+id/home_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="40dp"
+            android:src="@drawable/ic_round_home" />
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/facebook"
-            android:layout_marginHorizontal="12dp"/>
+            android:id="@+id/profile_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="40dp"
+            android:src="@drawable/ic_profile_circle" />
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/twitter"
-            android:layout_marginHorizontal="12dp"/>
+            android:id="@+id/logout_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="40dp"
+            android:src="@drawable/ic_round_logout" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/register_redirect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_now"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/socials"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

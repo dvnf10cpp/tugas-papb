@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".LoginGraphicsGuruji">
+    tools:context=".activity.Login">
 
     <ImageView
         android:id="@+id/logo"
@@ -44,19 +44,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
         <EditText
-            android:id="@+id/fullname_input"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:paddingStart="20dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"
-            android:hint="Fullname"
-            android:elevation="6dp"
-            android:textColorHint="@color/white"
-            android:background="@drawable/bg_input_guruji"
-            />
-        <EditText
-            android:id="@+id/email_input"
+            android:id="@+id/email_et"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:paddingStart="20dp"
@@ -68,32 +56,41 @@
             android:background="@drawable/bg_input_guruji"
             />
         <EditText
-            android:id="@+id/password_input"
+            android:id="@+id/password_et"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:paddingStart="20dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:hint="Password"
+            android:inputType="textPassword"
+            android:importantForAccessibility="yes"
             android:elevation="6dp"
             android:textColorHint="@color/white"
             android:background="@drawable/bg_input_guruji"
             />
         <Button
-            android:id="@+id/register_btn"
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="20dp"
-            android:text="Register"
+            android:text="Login"
             app:backgroundTint="@color/white"
             android:background="@drawable/bg_button_guruji"
             android:textColor="@color/blue"
             android:textAllCaps="true"
             android:elevation="6dp"
             android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/white"
+            android:layout_gravity="end"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/register_warning"
+        android:id="@+id/login_warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
@@ -130,10 +127,10 @@
             android:layout_marginHorizontal="12dp"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/login_redirect"
+        android:id="@+id/register_redirect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/already_have"
+        android:text="@string/register_now"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/socials"
         app:layout_constraintLeft_toLeftOf="parent"

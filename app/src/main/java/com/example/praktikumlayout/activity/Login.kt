@@ -1,8 +1,7 @@
-package com.example.praktikumlayout
+package com.example.praktikumlayout.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -10,10 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.praktikumlayout.R
 import com.example.praktikumlayout.domain.account.Account
 import com.example.praktikumlayout.domain.account.AccountService
 
-class LoginGraphicsGuruji : AppCompatActivity() {
+class Login : AppCompatActivity() {
     private lateinit var registerRedirect: TextView
     private lateinit var loginButton: Button
     private lateinit var emailEt: EditText
@@ -25,11 +25,12 @@ class LoginGraphicsGuruji : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_login_graphics_guruji)
+        setContentView(R.layout.activity_login)
 
         setupViews()
         setupListener()
         setupInsetListener()
+        setupPrefs()
     }
 
     private fun setupInsetListener() {
@@ -58,9 +59,24 @@ class LoginGraphicsGuruji : AppCompatActivity() {
         }
     }
 
+    private fun setupPrefs() {
+        val userPref = getSharedPreferences("UserSettings", MODE_PRIVATE)
+
+        val isLoggedIn = userPref.getBoolean("isLoggedIn", false)
+
+        if (isLoggedIn) {
+            navigateToHome()
+        }
+    }
+
     private fun navigateToRegister() {
-        val intent = Intent(this, RegisterGraphicsGuruji::class.java)
+        val intent = Intent(this, Register::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this, Home::class.java)
         startActivity(intent)
     }
 
@@ -85,12 +101,11 @@ class LoginGraphicsGuruji : AppCompatActivity() {
         with(userPref.edit()) {
             putBoolean("isLoggedIn", true)
             putString("fullname", user.fullname)
+            putString("email", user.email)
 
             apply()
         }
 
-        val intent = Intent(this, HomeGraphicsGuruji::class.java)
-        startActivity(intent)
-
+        navigateToHome()
     }
 }

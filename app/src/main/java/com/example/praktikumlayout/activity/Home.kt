@@ -1,4 +1,4 @@
-package com.example.praktikumlayout
+package com.example.praktikumlayout.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,15 +8,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.praktikumlayout.R
 
-class HomeGraphicsGuruji : AppCompatActivity() {
+class Home : AppCompatActivity() {
     private lateinit var logoutBtn: ImageView
+    private lateinit var profileBtn: ImageView
     private lateinit var welcomeTv: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_graphics_guruji)
+        setContentView(R.layout.activity_home)
 
         setupViews()
         setupListener()
@@ -32,6 +34,7 @@ class HomeGraphicsGuruji : AppCompatActivity() {
     private fun setupViews() {
         logoutBtn = findViewById(R.id.logout_btn)
         welcomeTv = findViewById(R.id.welcome)
+        profileBtn = findViewById(R.id.profile_btn)
     }
 
     private fun setupPrefs() {
@@ -45,6 +48,10 @@ class HomeGraphicsGuruji : AppCompatActivity() {
     private fun setupListener() {
         logoutBtn.setOnClickListener {
             logout()
+        }
+
+        profileBtn.setOnClickListener {
+            navigateToProfile()
         }
     }
 
@@ -62,7 +69,17 @@ class HomeGraphicsGuruji : AppCompatActivity() {
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginGraphicsGuruji::class.java)
+        val intent = Intent(this, Login::class.java)
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
         startActivity(intent)
     }
+
+    private fun navigateToProfile() {
+        val intent = Intent(this, Profile::class.java)
+
+        startActivity(intent)
+    }
+
 }

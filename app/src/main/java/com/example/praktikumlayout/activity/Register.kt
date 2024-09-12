@@ -1,4 +1,4 @@
-package com.example.praktikumlayout
+package com.example.praktikumlayout.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.praktikumlayout.R
 import com.example.praktikumlayout.domain.account.Account
 import com.example.praktikumlayout.domain.account.AccountService
 
-class RegisterGraphicsGuruji : AppCompatActivity() {
+class Register : AppCompatActivity() {
     private lateinit var loginRedirect: TextView
     private lateinit var registerBtn: Button
     private lateinit var fullnameEt: EditText
@@ -25,7 +26,7 @@ class RegisterGraphicsGuruji : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_register_graphics_guruji)
+        setContentView(R.layout.activity_register)
 
         setupViews()
         setupListener()
@@ -57,7 +58,7 @@ class RegisterGraphicsGuruji : AppCompatActivity() {
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginGraphicsGuruji::class.java)
+        val intent = Intent(this, Login::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
     }
@@ -73,19 +74,12 @@ class RegisterGraphicsGuruji : AppCompatActivity() {
             password
         )
 
-        if (fullname.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            // invalid validation
-            registerWarning.text = "Input cannot be empty"
+        val res = accountService.registerAccount(account)
+
+        if (!res.isEmpty()) {
+            registerWarning.text = res
             return
         }
-
-        if (accountService.isAlreadyRegistered(account)) {
-            // already registered
-            registerWarning.text = "Email already registered"
-            return
-        }
-
-        accountService.registerAccount(account)
 
         navigateToLogin()
     }

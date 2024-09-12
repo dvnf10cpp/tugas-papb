@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".LoginGraphicsGuruji">
+    tools:context=".activity.Login">
 
     <ImageView
         android:id="@+id/logo"
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="300dp" />
+        android:layout_marginTop="80dp" />
     <TextView
         android:id="@+id/para"
         android:layout_width="wrap_content"
@@ -46,12 +46,60 @@
         app:layout_constraintTop_toBottomOf="@id/para"
         app:layout_constraintRight_toRightOf="parent" />
     <LinearLayout
+        android:id="@+id/form_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:padding="30dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/welcome"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+        <Button
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="20dp"
+            android:text="Email"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/bg_button_guruji"
+            android:textColor="@color/blue"
+            android:textAllCaps="true"
+            android:elevation="6dp"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/whatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="20dp"
+            android:text="whatsapp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/bg_button_guruji"
+            android:textColor="@color/blue"
+            android:textAllCaps="true"
+            android:elevation="6dp"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/linkedin"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="20dp"
+            android:text="linkedin"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/bg_button_guruji"
+            android:textColor="@color/blue"
+            android:textAllCaps="true"
+            android:elevation="6dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/socials"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:padding="20dp"
+        android:padding="10dp"
         android:orientation="horizontal"
         android:background="@drawable/bg_white_nav_guruji"
         app:layout_constraintBottom_toBottomOf="parent"

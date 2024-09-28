@@ -73,6 +73,7 @@ class Login : AppCompatActivity() {
         val intent = Intent(this, Register::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 
     private fun navigateToHome() {

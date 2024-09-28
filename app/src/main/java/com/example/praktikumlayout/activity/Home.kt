@@ -80,6 +80,7 @@ class Home : AppCompatActivity() {
         val intent = Intent(this, Profile::class.java)
 
         startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 
 }

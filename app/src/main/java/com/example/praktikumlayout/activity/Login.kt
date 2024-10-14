@@ -77,7 +77,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, Home::class.java)
+        val intent = Intent(this, MrHead::class.java)
         startActivity(intent)
     }
 

@@ -1,7 +1,9 @@
 package com.example.praktikumlayout.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,6 +23,7 @@ class MrHead : AppCompatActivity() {
     private lateinit var eyebrowImage: ImageView
     private lateinit var beardImage: ImageView
     private lateinit var textWelcome: TextView
+    private lateinit var profileBtn: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,7 @@ class MrHead : AppCompatActivity() {
     private fun setupPrefs() {
         val userPref = getSharedPreferences("UserSettings", MODE_PRIVATE)
 
-        val email = userPref.getString("email", "")
+        val email = userPref.getString("email", "ubdevanferrel04@student.ub.ac.id")
 
         textWelcome.setText("Welcome $email")
     }
@@ -57,6 +60,8 @@ class MrHead : AppCompatActivity() {
         beardImage = findViewById(R.id.beardImage)
 
         textWelcome = findViewById(R.id.textWelcome)
+
+        profileBtn = findViewById(R.id.profile_btn)
     }
 
     private fun setupListeners() {
@@ -71,6 +76,11 @@ class MrHead : AppCompatActivity() {
         }
         beardCheckBox.setOnCheckedChangeListener { _, isChecked ->
             toggleCheck(isChecked, beardImage)
+        }
+        profileBtn.setOnClickListener {
+            val intent = Intent(this, Camera::class.java)
+
+            startActivity(intent)
         }
 
     }

@@ -90,22 +90,22 @@ class Login : AppCompatActivity() {
         )
 
         // implement login
-        val res = accountService.accountMatched(credential) == true
-        if (!res) {
-            loginWarningTv.text = "Invalid Email or Password"
-            return
-        }
-
-        val user = accountService.getAccount(credential)
-
-        val userPref = getSharedPreferences("UserSettings", MODE_PRIVATE)
-        with(userPref.edit()) {
-            putBoolean("isLoggedIn", true)
-            putString("fullname", user.fullname)
-            putString("email", user.email)
-
-            apply()
-        }
+//        val res = accountService.accountMatched(credential) == true
+//        if (!res) {
+//            loginWarningTv.text = "Invalid Email or Password"
+//            return
+//        }
+//
+//        val user = accountService.getAccount(credential)
+//
+//        val userPref = getSharedPreferences("UserSettings", MODE_PRIVATE)
+//        with(userPref.edit()) {
+//            putBoolean("isLoggedIn", true)
+//            putString("fullname", user.fullname)
+//            putString("email", user.email)
+//
+//            apply()
+//        }
 
         navigateToHome()
     }

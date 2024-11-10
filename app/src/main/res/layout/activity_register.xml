@@ -43,18 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/para"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
-        <EditText
-            android:id="@+id/fullname_input"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:paddingStart="20dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"
-            android:hint="Fullname"
-            android:elevation="6dp"
-            android:textColorHint="@color/white"
-            android:background="@drawable/bg_input_guruji"
-            />
+
         <EditText
             android:id="@+id/email_input"
             android:layout_width="match_parent"

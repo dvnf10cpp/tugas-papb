@@ -1,6 +1,15 @@
 package com.example.praktikumlayout.domain.account
 
+import android.content.Context
+import android.util.Log
+import com.example.praktikumlayout.domain.response.Response
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import kotlinx.coroutines.tasks.await
+
 class AccountService private constructor() {
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
     companion object {
         private var instance: AccountService? = null
 
@@ -13,41 +22,57 @@ class AccountService private constructor() {
         }
     }
 
-    fun accountMatched(account: Account): Boolean {
-        return AccountsData.accounts.any { a ->
-            a.email == account.email &&
-                    a.password == account.password
+    suspend fun loginAccount(account: Account): Response {
+        var resp = Response()
+
+        if (account.email.isEmpty() || account.password.isEmpty()) {
+            resp.code = 400
+            resp.message = "Fields must not be empty"
+            return resp
         }
+
+        try {
+            firebaseAuth
+                .signInWithEmailAndPassword(
+                    account.email,
+                    account.password
+                ).await()
+
+            resp.code = 200
+            resp.message = "Login success"
+        } catch (e: Exception) {
+            resp.code = 500
+            resp.message = e.message ?: "Login failed"
+        }
+
+        return resp
     }
 
-    fun isAlreadyRegistered(account: Account): Boolean {
-        return AccountsData.accounts.any { a ->
-            a.email == account.email
-        }
-    }
+    suspend fun registerAccount(account: Account): Response {
+        var resp = Response()
 
-    fun getAccount(account: Account): Account {
-        return AccountsData.accounts.find {
-            it.email == account.email &&
-                    it.password == account.password
-        }!!
-    }
-
-    fun registerAccount(account: Account): String {
-
-        if (account.fullname.isEmpty() || account.email.isEmpty() || account.password.isEmpty()) {
-            // invalid validation
-            return "Input cannot be empty"
+        if (account.email.isEmpty() || account.password.isEmpty()) {
+            resp.code = 400
+            resp.message = "Fields must not be empty"
+            return resp
         }
 
-        if (isAlreadyRegistered(account)) {
-            // already registered
-            return "Email already registered"
+        try {
+            firebaseAuth
+                .createUserWithEmailAndPassword(
+                    account.email,
+                    account.password
+                ).await()
+
+            resp.code = 200
+            resp.message = "Register success"
+        } catch (e: Exception) {
+            resp.code = 500
+            resp.message = e.message ?: "Register failed"
         }
 
-        AccountsData.accounts.add(account)
+        return resp
 
-        return ""
     }
 
     fun updateAccount(account: Account) {

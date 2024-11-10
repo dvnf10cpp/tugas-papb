@@ -87,12 +87,11 @@ class Profile : AppCompatActivity() {
     }
 
     private fun update() {
-        val fullname = fullnameEt.text.toString()
+
         val email = emailEt.text.toString()
         val password = passwordEt.text.toString()
 
         val account = Account(
-            fullname,
             email,
             password
         )

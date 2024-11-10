@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.praktikumlayout.R
 import com.example.praktikumlayout.domain.account.Account
 import com.example.praktikumlayout.domain.account.AccountService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class Login : AppCompatActivity() {
     private lateinit var registerRedirect: TextView
@@ -77,8 +81,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, MrHead::class.java)
-        startActivity(intent)
+
     }
 
     private fun attemptLogin() {
@@ -90,23 +93,17 @@ class Login : AppCompatActivity() {
         )
 
         // implement login
-//        val res = accountService.accountMatched(credential) == true
-//        if (!res) {
-//            loginWarningTv.text = "Invalid Email or Password"
-//            return
-//        }
-//
-//        val user = accountService.getAccount(credential)
-//
-//        val userPref = getSharedPreferences("UserSettings", MODE_PRIVATE)
-//        with(userPref.edit()) {
-//            putBoolean("isLoggedIn", true)
-//            putString("fullname", user.fullname)
-//            putString("email", user.email)
-//
-//            apply()
-//        }
+        lifecycleScope.launch {
+            val resp = accountService.loginAccount( credential)
 
-        navigateToHome()
+            if (resp.code != 200) {
+                Toast.makeText(this@Login, resp.message, Toast.LENGTH_SHORT).show()
+
+            } else {
+                val intent = Intent(this@Login, MrHead::class.java)
+                startActivity(intent)
+            }
+        }
+
     }
 }

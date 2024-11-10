@@ -2,21 +2,25 @@ package com.example.praktikumlayout.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.praktikumlayout.R
 import com.example.praktikumlayout.domain.account.Account
 import com.example.praktikumlayout.domain.account.AccountService
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 class Register : AppCompatActivity() {
     private lateinit var loginRedirect: TextView
     private lateinit var registerBtn: Button
-    private lateinit var fullnameEt: EditText
     private lateinit var emailEt: EditText
     private lateinit var passwordEt: EditText
     private lateinit var registerWarning: TextView
@@ -41,7 +45,6 @@ class Register : AppCompatActivity() {
     private fun setupViews() {
         loginRedirect = findViewById(R.id.login_redirect)
         registerBtn = findViewById(R.id.register_btn)
-        fullnameEt = findViewById(R.id.fullname_input)
         emailEt = findViewById(R.id.email_input)
         passwordEt = findViewById(R.id.password_input)
         registerWarning = findViewById(R.id.register_warning)
@@ -65,23 +68,26 @@ class Register : AppCompatActivity() {
     }
 
     private fun attemptRegister() {
-        val fullname = fullnameEt.text.toString()
+
         val email = emailEt.text.toString()
         val password = passwordEt.text.toString()
 
         val account = Account(
-            fullname,
             email,
             password
         )
 
-        val res = accountService.registerAccount(account)
+        lifecycleScope.launch {
+            val resp = accountService.registerAccount(account)
 
-        if (!res.isEmpty()) {
-            registerWarning.text = res
-            return
+            if (resp.code != 200) {
+                Toast.makeText(this@Register, resp.message, Toast.LENGTH_SHORT).show()
+
+            } else {
+                val intent = Intent(this@Register, Login::class.java)
+                startActivity(intent)
+            }
         }
 
-        navigateToLogin()
     }
 }
